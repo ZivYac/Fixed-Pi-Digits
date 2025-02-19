@@ -2,5 +2,9 @@
   "title": "Display the first n-digits of Pi",
   "welcome": "hello {name}, good day",
   "lbl.formateDate": "{dateParam, date, short}",
-  "lbl.log_in": "login in english"
+  "lbl.log_in": "login in english",
+  "lbl.username": "username",
+  "lbl.password": "password",
+  "lbl.sign_in": "Sign In",
+  "lbl.forgot_password": "Forgot Password"
 }

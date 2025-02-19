@@ -1,5 +1,9 @@
 {
   "title": "הספרות הראשונות של פאי n",
   "lbl.formateDate": "{dateParam, date, medium}",
-  "lbl.log_in": "תיכנס חביבי"
+  "lbl.log_in": "תיכנס חביבי",
+  "lbl.username": "שם משתמש",
+  "lbl.password": "סיסמה",
+  "lbl.sign_in": "היכנס",
+  "lbl.forgot_password": "שכחתי סיסמה"
 }

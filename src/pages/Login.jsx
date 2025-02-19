@@ -23,7 +23,11 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
 
   const ForgotPassword = () => {
-    return <Flex>Forgot Password</Flex>;
+    return (<Flex>
+            <Label sx={{ mt: "tiny" }}>
+              <FormattedMessage id="lbl.forgot_password" />
+            </Label>
+            </Flex>);
   };
 
   const ShowPassword = ({ onClick, showPassword }) => {

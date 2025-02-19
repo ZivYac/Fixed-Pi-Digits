@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import PropTypes from "prop-types";
 
-const IconGlobe = ({ color = "white", ...props }) => (
+const IconGlobe = ({ color = "black", ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
