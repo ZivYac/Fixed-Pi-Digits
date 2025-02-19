@@ -1,0 +1,6 @@
+{
+  "title": "Display the first n-digits of Pi",
+  "welcome": "hello {name}, good day",
+  "lbl.formateDate": "{dateParam, date, short}",
+  "lbl.log_in": "login in english"
+}
