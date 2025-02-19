@@ -1,9 +1,15 @@
 {
   "title": "Afișează primele n-cifre ale lui Pi",
+  "welcome": "salut {name}, zi buna",
   "lbl.formateDate": "{dateParam, date, medium}",
   "lbl.log_in": "enteritis",
   "lbl.username": "nume de utilizator",
   "lbl.password": "parolă",
   "lbl.sign_in": "depune",
-  "lbl.forgot_password": "Aţi uitat parola"
+  "lbl.forgot_password": "Aţi uitat parola",
+  "lbl.number_of_digits":"număr de cifre",
+  "lbl.start_button": "început",
+  "lbl.pause_button": "pauză",
+  "lbl.unpause_button": "întrerupeți",
+  "lbl.refresh_button": "reîmprospăta"
 }

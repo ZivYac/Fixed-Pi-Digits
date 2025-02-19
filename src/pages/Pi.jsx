@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Title from "../components/Title";
 import RenderDigits from "../components/RenderDigits";
+import { FormattedMessage } from "react-intl";
 
 //================================================================================
 const Pi = () => {
@@ -55,14 +56,17 @@ const Pi = () => {
   //--------------------------------------------------------------
   //Handle minus function, sub 1 from  numDigits
   const handleMinus = () => {
-    setNumDigits(numDigits - 1);
+    if (numDigits === "") setNumDigits(0);
+    if(numDigits <= 1001) errorType.tooLong = false;
+    if(numDigits > 0) setNumDigits(Number(numDigits) - 1);
     setIsStart(false);
   };
   //--------------------------------------------------------------
   //Handle plus function, sub 1 from  numDigits
   const handlePlus = () => {
     if (numDigits === "") setNumDigits(1);
-    else setNumDigits(numDigits + 1);
+    if(numDigits >= 1000) errorType.tooLong = true;
+    setNumDigits(Number(numDigits) + 1)
     setIsStart(false);
   };
   //--------------------------------------------------------------
@@ -72,6 +76,7 @@ const Pi = () => {
   };
   //--------------------------------------------------------------
   const handleStart = () => {
+    if(!isStart) setPause(true);
     setIsStart(true);
     setDigitsToDisplay("3.");
     dispatch(getPiDigits(numDigits));
@@ -87,8 +92,12 @@ const Pi = () => {
   };
   //--------------------------------------------------------------
   const changeNumDigit = (value) => {
-    handleRefresh();
-    setNumDigits(value || "");
+    if(value === '' || Number(value)) {
+      if(value > 1000 && value !== '')  errorType.tooLong = true;
+      else errorType.tooLong = false;
+      handleRefresh();
+      setNumDigits(value || "");
+    }
   };
   //--------------------------------------------------------------
 
@@ -133,7 +142,7 @@ const Pi = () => {
             width: "15%",
           }}
         >
-          <Text>Number of digits</Text>
+          <FormattedMessage id="lbl.number_of_digits" />
           <Flex id="plusMinus-container">
             <MyButton backgroundColor="coral" onClick={handleMinus}>
               -
@@ -176,7 +185,7 @@ const Pi = () => {
               bg="coral"
               sx={{ width: "100px" }}
             >
-              {pause ? "unPause" : "pause"}
+              {pause ?   <FormattedMessage id="lbl.pause_button" /> :   <FormattedMessage id="lbl.unpause_button" />}
             </MyButton>
             <MyButton
               disabled={isStart || !numDigits}
@@ -184,11 +193,11 @@ const Pi = () => {
               bg="DeepSkyBlue"
               sx={{ width: "100px" }}
             >
-              Start
+              <FormattedMessage id="lbl.start_button" />
             </MyButton>
           </Flex>
           <MyButton bg="lightgreen" onClick={handleRefresh}>
-            Refresh
+          <FormattedMessage id="lbl.refresh_button" />
           </MyButton>
         </Flex>
         <RenderDigits

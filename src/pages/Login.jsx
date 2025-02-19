@@ -12,6 +12,8 @@ import { doLogin } from "../redux/slices/AuthSlice";
 import logo from "../assets/images/logo.svg";
 import background from "../assets/images/background.webp";
 
+import MindRouter from "../common/router";
+
 const Login = () => {
   const history = useHistory();
   const { loggedIn } = useSelector((state) => state.auth);
@@ -144,13 +146,13 @@ const Login = () => {
           {errorState ? (
             <Flex sx={{ width: "100%", height: "2rem" }}>{errorState}</Flex>
           ) : (
-            <Flex sx={{ width: "100%", justifyContent: "center" }}>
+            <Flex sx={{ width: "100%", justifyContent: "center"}}>
               <ForgotPassword />
             </Flex>
           )}
 
           <Button
-            sx={{ py: "small", fontSize: "button", mt: "larger" }}
+            sx={{ py: "small", fontSize: "button", mt: "larger", cursor: "pointer"}}
             type="submit"
             disabled={isLoading}
           >

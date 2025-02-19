@@ -1,9 +1,15 @@
 {
   "title": "הספרות הראשונות של פאי n",
+  "welcome": "שלום {name}, יום טוב",
   "lbl.formateDate": "{dateParam, date, medium}",
   "lbl.log_in": "תיכנס חביבי",
   "lbl.username": "שם משתמש",
   "lbl.password": "סיסמה",
   "lbl.sign_in": "היכנס",
-  "lbl.forgot_password": "שכחתי סיסמה"
+  "lbl.forgot_password": "שכחתי סיסמה",
+  "lbl.number_of_digits": "מספר הספרות",
+  "lbl.start_button": "התחל",
+  "lbl.pause_button": "הפסק",
+  "lbl.unpause_button": "המשך",
+  "lbl.refresh_button": "טען מחדש"
 }
