@@ -5,7 +5,7 @@ const Title = () => {
   return (
     <Text
       sx={{
-        color: "white",
+        color: "text",
         fontFamily: "Times news Roman",
         fontStyle: "normal",
         fontSize: "50px",

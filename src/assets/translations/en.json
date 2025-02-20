@@ -12,5 +12,7 @@
   "lbl.pause_button": "Pause",
   "lbl.unpause_button": "UnPause",
   "lbl.refresh_button": "Refresh",
-  "lbl.logout": "Log Out"
+  "lbl.logout": "Log Out",
+  "lbl.theme_button_light": "Switch to dark mode",
+  "lbl.theme_button_dark": "Switch to light mode"
 }

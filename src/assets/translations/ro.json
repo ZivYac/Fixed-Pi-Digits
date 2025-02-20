@@ -12,5 +12,7 @@
   "lbl.pause_button": "pauză",
   "lbl.unpause_button": "întrerupeți",
   "lbl.refresh_button": "reîmprospăta",
-  "lbl.logout": "deconectați-vă"
+  "lbl.logout": "deconectați-vă",
+  "lbl.theme_button_light": "comutați pe modul întunecat",
+  "lbl.theme_button_dark": "comutați modul de lumină"
 }

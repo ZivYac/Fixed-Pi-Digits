@@ -12,5 +12,7 @@
   "lbl.pause_button": "הפסק",
   "lbl.unpause_button": "המשך",
   "lbl.refresh_button": "טען מחדש",
-  "lbl.logout": "יציאה"
+  "lbl.logout": "יציאה",
+  "lbl.theme_button_light": "העבר למצב כהה",
+  "lbl.theme_button_dark": "העבר למצב בהיר"
 }

@@ -1,6 +1,6 @@
 //Imports from react open source
 import React, { useEffect, useState } from "react";
-import { Text, Flex, Input } from "theme-ui";
+import { Text, Flex, Input, ThemeProvider } from "theme-ui";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getPiDigits } from "../redux/slices/PiSlice";
@@ -11,7 +11,9 @@ import Title from "../components/Title";
 import RenderDigits from "../components/RenderDigits";
 import { FormattedMessage } from "react-intl";
 
+import { doLogout } from "../redux/slices/AuthSlice";
 
+import { theme } from "../common/theme";
 
 //================================================================================
 const Pi = () => {
@@ -104,13 +106,14 @@ const Pi = () => {
   //--------------------------------------------------------------
 
   return (
+    <ThemeProvider theme={theme}>
     <Flex
       id="main_flex"
       sx={{
         flexDirection: "column",
         justifyContent: "center",
         alignContent: "center",
-        background: "#292A32",
+        background: "mainBackground",
         minHeight: "100vh",
       }}
     >
@@ -119,6 +122,7 @@ const Pi = () => {
       <Flex
         id="Body"
         sx={{
+          background: "mainBackground",
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "space-around",
@@ -134,7 +138,7 @@ const Pi = () => {
           id="main box"
           sx={{
             alignItems: "center",
-            background: "whitesmoke",
+            background: "background",
             border: "solid",
             borderRadius: "30px",
             flexDirection: "column",
@@ -147,7 +151,8 @@ const Pi = () => {
         >
           <FormattedMessage id="lbl.number_of_digits" />
           <Flex id="plusMinus-container">
-            <MyButton backgroundColor="coral" onClick={handleMinus}>
+            <MyButton backgroundColor="coral" //!!!
+             onClick={handleMinus}>
               -
             </MyButton>
             <Input
@@ -193,7 +198,7 @@ const Pi = () => {
             <MyButton
               disabled={isStart || !numDigits}
               onClick={handleStart}
-              bg="DeepSkyBlue"
+              bg="DeepSkyBlue" //!!!
               sx={{ width: "100px" }}
             >
               <FormattedMessage id="lbl.start_button" />
@@ -216,6 +221,7 @@ const Pi = () => {
       </Flex>
       <Footer />
     </Flex>
+    </ThemeProvider>
   );
 };
 //================================================================================

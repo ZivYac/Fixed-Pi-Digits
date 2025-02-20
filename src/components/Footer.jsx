@@ -8,7 +8,7 @@ const Footer = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "DeepSkyBlue",
+        backgroundColor: "headerFooterBlue",
         width: "100%",
         height: "128px",
       }}
