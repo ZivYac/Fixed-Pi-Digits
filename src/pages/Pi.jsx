@@ -11,6 +11,8 @@ import Title from "../components/Title";
 import RenderDigits from "../components/RenderDigits";
 import { FormattedMessage } from "react-intl";
 
+
+
 //================================================================================
 const Pi = () => {
   // Use dispatch to call redux functions
@@ -125,6 +127,7 @@ const Pi = () => {
           my: "auto",
         }}
       >
+        
         <Title />
 
         <Flex

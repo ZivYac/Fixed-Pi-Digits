@@ -11,5 +11,6 @@
   "lbl.start_button": "Start",
   "lbl.pause_button": "Pause",
   "lbl.unpause_button": "UnPause",
-  "lbl.refresh_button": "Refresh"
+  "lbl.refresh_button": "Refresh",
+  "lbl.logout": "Log Out"
 }

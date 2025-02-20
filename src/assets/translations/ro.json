@@ -11,5 +11,6 @@
   "lbl.start_button": "început",
   "lbl.pause_button": "pauză",
   "lbl.unpause_button": "întrerupeți",
-  "lbl.refresh_button": "reîmprospăta"
+  "lbl.refresh_button": "reîmprospăta",
+  "lbl.logout": "deconectați-vă"
 }
