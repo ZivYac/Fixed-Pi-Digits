@@ -11,7 +11,7 @@ const MindRouter = () => {
     <Router>
       <ScrollToTop />
       <Switch>
-        <PublicRoute exact path="/" component={Pi} />
+        <PublicRoute exact path="/" component={Login} />
 
         <PrivateRoute exact path="/home" component={Pi} />
       </Switch>

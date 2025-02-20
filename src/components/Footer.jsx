@@ -1,4 +1,5 @@
 import { Text, Flex } from "theme-ui";
+import { FormattedMessage } from "react-intl";
 const Footer = () => {
   return (
     <Flex

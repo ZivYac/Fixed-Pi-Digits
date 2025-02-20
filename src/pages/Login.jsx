@@ -50,7 +50,10 @@ const Login = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      dispatch(doLogin());
+      const data ={
+        usernameInputValue: document.querySelector('.input-username').value,
+        passwordInputValue: document.querySelector('.input-password').value};
+      dispatch(doLogin(data));
     } catch (error) {
       setErrorState(error);
     }
@@ -109,6 +112,7 @@ const Login = () => {
               <FormattedMessage id="lbl.username" />
             </Label>
             <Input
+            className="input-username"
               id="username"
               name="username"
               {...register("username", {
@@ -126,6 +130,7 @@ const Login = () => {
             </Label>
             <Flex sx={{ width: "100%" }}>
               <Input
+                className="input-password"
                 id="password"
                 name="password"
                 type={!showPassword ? "password" : "text"}
@@ -144,7 +149,7 @@ const Login = () => {
           </Flex>
 
           {errorState ? (
-            <Flex sx={{ width: "100%", height: "2rem" }}>{errorState}</Flex>
+            <Flex sx={{ width: "100%", height: "2rem" }}>{String(errorState)}</Flex> //!!!
           ) : (
             <Flex sx={{ width: "100%", justifyContent: "center"}}>
               <ForgotPassword />

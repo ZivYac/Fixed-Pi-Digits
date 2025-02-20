@@ -9,7 +9,7 @@ const Header = () => {
     <Flex
       id="Pi_Flex"
       sx={{
-        backgroundColor: "DeepSkyBlue ",
+        backgroundColor: "DeepSkyBlue",
         justifyContent: "space-around",
         alignItems: "center",
         width: "100%",
@@ -27,6 +27,7 @@ const Header = () => {
       <Image src={pi_header}></Image>
 
       <LanguageSwitch sx={{ width: "10rem" }} />
+
     </Flex>
   );
 };

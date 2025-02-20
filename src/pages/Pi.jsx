@@ -49,7 +49,7 @@ const Pi = () => {
       // the function we want to call
       printDigits();
       //the interval
-    }, 500);
+    }, 50);
     return () => clearInterval(interval);
   }, [isStart, digitsToDisplay, piDigits, numDigits]);
 
@@ -207,6 +207,7 @@ const Pi = () => {
             isStart &&
             digitsToDisplay !== null &&
             digitsToDisplay.length !== numDigits + 2
+            //check if the +2 cause the not finishing bug
           }
         />
       </Flex>
