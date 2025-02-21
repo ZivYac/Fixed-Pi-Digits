@@ -37,6 +37,14 @@ const Pi = () => {
   });
   const increaseInterval = useRef(null);
   const [selectedRadioButton, setSelectedRadioButton] = useState(10);
+  const [serachNumber, setSearchNumber] = useState('');
+  const [disablePause, setDisablePause] = useState(false);
+  const [foundIndexes, setFoundIndexes] = useState([]);
+
+  useEffect(() => {
+    setDisablePause(digitsToDisplay.length - 2 === numDigits);
+  }, [digitsToDisplay]);
+
   //--------------------------------------------------------------
   //Use effect to print every second 1 digit
   useEffect(() => {
@@ -45,7 +53,6 @@ const Pi = () => {
       if (isStart && digitsToDisplay !== null && piDigits){
           setDigitsToDisplay(digitsToDisplay + piDigits.charAt (digitsToDisplay.length - 2));
       }
-      
     };
 
     // calls a function at specified intervals (in milliseconds)
@@ -53,7 +60,7 @@ const Pi = () => {
       // the function we want to call
       printDigits();
       //the interval
-    }, 50);
+    }, 500);
     return () => clearInterval(interval);
   }, [isStart, digitsToDisplay, piDigits, numDigits]);
 
@@ -81,6 +88,7 @@ const Pi = () => {
   //--------------------------------------------------------------
   const handleStart = () => {
     if(!isStart) setPause(true);
+    setDisablePause(false);
     setIsStart(true);
     setDigitsToDisplay("3.");
     dispatch(getPiDigits(numDigits));
@@ -96,7 +104,7 @@ const Pi = () => {
   };
   //--------------------------------------------------------------
   const changeNumDigit = (value) => {
-    if(value === '' || Number(value)) {
+    if(value === '' || value ==='0'|| Number(value) ) {
       if(value > 1000 && value !== '')  errorType.tooLong = true;
       else errorType.tooLong = false;
       handleRefresh();
@@ -121,6 +129,29 @@ const Pi = () => {
     increaseInterval.current = setInterval(handleMinus, 50);
   }
 
+  const changeSearchNum = (value) => {
+    if(value === '' || (Number(value) && value.length < 1000)) {
+      setSearchNumber(value);
+    }
+  }
+  const findIndexes = (num) => {
+    dispatch(getPiDigits(numDigits));
+    const found = [];
+    let index = piDigits.indexOf(num);
+    while(index !== -1) {
+      found.push(index);
+      index = piDigits.indexOf(num, index + 1);
+    }
+    return found;
+  }
+  const handleSearch = (value) => {
+    if(value === '') setFoundIndexes([]);
+    else {
+      const indexes = findIndexes(value);
+      setFoundIndexes(indexes);
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
     <Flex
@@ -134,6 +165,8 @@ const Pi = () => {
       }}
     >
       <Header />
+
+      <Text></Text>
 
       <Flex
         id="Body"
@@ -162,6 +195,75 @@ const Pi = () => {
           py: "20px",
           my: "auto",
         }}>
+
+          <Flex 
+            sx={{
+              background: "boxesBackground",
+              border: "solid",
+              borderRadius: "30px",
+              height: "280px",
+              justifyContent: "space-between",
+              marginTop: "50px",
+              py: "20px",
+              width: "25%",
+              flexDirection: "column"
+            }}>
+              <Input
+              className="SearchInput" 
+              sx={{
+                color: "text",
+                background: "buttonBackground",
+                marginBottom: "5px"
+              }}
+              type="text"
+              value = {serachNumber}
+              onChange={(e) => {
+                changeSearchNum(e.target.value);
+              }}
+              ></Input>
+              <Flex
+                id="FoundIndexes"
+                className="FoundIndexes"
+                sx={{
+                  background: "boxesBackground",
+                  height: "100%",
+                  maxHeight: "100%",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gridTemplateRows: "repeat(4, 1fr)",
+                  overflow: 
+                  foundIndexes.length > 10 ? "scroll" : "hidden"
+                }}>
+                  {foundIndexes.map((item) => {
+                        return (
+                        <Text
+                        sx={{
+                          background: "buttonBackground",
+                          border: "solid",
+                          borderRadius: "30px",
+                          textAlign: "center"
+                        }}
+                        >
+                        {item}
+                        </Text>
+                      );
+                    })}
+              </Flex>
+              <MyButton
+                sx={{
+                  backgroundColor: "buttonBackground",
+                  color: "text",
+                  width: "auto",
+                  textAlign: "center"
+                }}
+                onClick={() => {handleSearch(document.querySelector('.SearchInput').value);}}
+                >
+                Search
+              </MyButton>
+          </Flex>
+
           <Flex
             id="main box"
             sx={{
@@ -177,6 +279,9 @@ const Pi = () => {
               width: "25%"
             }}
           >
+            
+
+
             <FormattedMessage id="lbl.number_of_digits" />
             <Flex id="plusMinus-container">
               <MyButton sx={{
@@ -226,24 +331,23 @@ const Pi = () => {
               sx={{ width: "100%", justifyContent: "space-around" }}
             >
               <MyButton
-                disabled={
-                  (!piDigits && isRefreshed) ||
-                  digitsToDisplay.length === numDigits + 2 ||
-                  !numDigits ||
-                  errorType.negative ||
-                  errorType.tooLong ||
-                  isRefreshed
-                }
                 sx={{
                   width: "auto",
                   backgroundColor: "minusPause",
                   width: "auto",
-                  color: "text"
+                  color: "text",
                 }} 
                 onClick={handlePause}
+                disabled={
+                  !numDigits ||
+                  errorType.negative ||
+                  errorType.tooLong ||
+                  isRefreshed || 
+                  disablePause
+                }
               >
                 {pause ?   <FormattedMessage id="lbl.pause_button" /> :   <FormattedMessage id="lbl.unpause_button" />}
-              </MyButton>
+              </MyButton> 
               <MyButton sx={{
                 backgroundColor: "plusStart",
                 color: "text",
