@@ -45,7 +45,7 @@ const Pi = () => {
     const printDigits = () => {
       if (isStart && digitsToDisplay !== null)
         setDigitsToDisplay(
-          digitsToDisplay + piDigits.charAt (digitsToDisplay.length) //!!!
+          digitsToDisplay + piDigits.charAt (digitsToDisplay.length - 2)
         );
     };
 
@@ -191,7 +191,7 @@ const Pi = () => {
                 changeNumDigit(e.target.value);
               }}
             />
-            <MyButton backgroundColor="DeepSkyBlue" 
+            <MyButton backgroundColor="DeepSkyBlue" //!!!
             onMouseDown={handleMouseDownIncrease}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}>
