@@ -43,7 +43,7 @@ const Pi = () => {
   useEffect(() => {
     // add 1 character to the display string
     const printDigits = () => {
-      if (isStart && digitsToDisplay !== null)
+      if (isStart && digitsToDisplay !== null && piDigits)
         setDigitsToDisplay(
           digitsToDisplay + piDigits.charAt (digitsToDisplay.length - 2)
         );
@@ -90,7 +90,7 @@ const Pi = () => {
   //--------------------------------------------------------------
   const handleRefresh = () => {
     setIsStart(false);
-    setPause(false);
+    setPause(true);
     setDigitsToDisplay("3.");
     setisRefreshed(true);
     setNumDigits(20);
@@ -168,7 +168,13 @@ const Pi = () => {
         >
           <FormattedMessage id="lbl.number_of_digits" />
           <Flex id="plusMinus-container">
-            <MyButton backgroundColor="coral" //!!!
+            <MyButton sx={{
+              backgroundColor: "minusPause",
+              color: "text",
+              width: "auto",
+              textAlign: "center"
+            }}
+             disabled={numDigits <= 0}
              onMouseDown={handleMouseDownDecrease}
              onMouseUp={handleMouseUp}
              onMouseLeave={handleMouseUp}>
@@ -191,7 +197,12 @@ const Pi = () => {
                 changeNumDigit(e.target.value);
               }}
             />
-            <MyButton backgroundColor="DeepSkyBlue" //!!!
+            <MyButton sx={{
+              backgroundColor: "plusStart",
+              color: "text",
+              width: "auto",
+              textAlign: "center"
+            }} 
             onMouseDown={handleMouseDownIncrease}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}>
@@ -209,19 +220,27 @@ const Pi = () => {
                 digitsToDisplay.length === numDigits + 2 ||
                 !numDigits ||
                 errorType.negative ||
-                errorType.tooLong
+                errorType.tooLong ||
+                isRefreshed
               }
+              sx={{
+                width: "auto",
+                backgroundColor: "minusPause",
+                width: "auto",
+                color: "text"
+              }} 
               onClick={handlePause}
-              bg="coral"
-              sx={{ width: "100px" }}
             >
               {pause ?   <FormattedMessage id="lbl.pause_button" /> :   <FormattedMessage id="lbl.unpause_button" />}
             </MyButton>
-            <MyButton
+            <MyButton sx={{
+              backgroundColor: "plusStart",
+              color: "text",
+              width: "auto",
+              textAlign: "center"
+            }} 
               disabled={isStart || !numDigits}
               onClick={handleStart}
-              bg="DeepSkyBlue" //!!!
-              sx={{ width: "100px" }}
             >
               <FormattedMessage id="lbl.start_button" />
             </MyButton>
@@ -236,8 +255,7 @@ const Pi = () => {
           showSpinner={
             isStart &&
             digitsToDisplay !== null &&
-            digitsToDisplay.length !== numDigits + 2
-            //check if the +2 cause the not finishing bug
+            digitsToDisplay.length - 2 !== numDigits
           }
         />
       </Flex>

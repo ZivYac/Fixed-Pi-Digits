@@ -10,6 +10,8 @@ export const theme = {
     background: "#fff",
     mainBackground: "lightGrey",
     headerFooter: "DeepSkyBlue",
+    plusStart: "DeepSkyBlue",
+    minusPause: "coral",
     primary: "#33e",
     modes: {
       dark: {
@@ -18,6 +20,8 @@ export const theme = {
         background: "#222",
         mainBackground: "#000",
         headerFooter: "#343434",
+        plusStart: "#001b56",
+        minusPause: "#562100",
         primary: "#33e",
       },
     }
