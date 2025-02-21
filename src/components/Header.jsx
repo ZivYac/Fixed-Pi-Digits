@@ -22,7 +22,7 @@ const Header = () => {
         <Flex
           id="Pi_Flex"
           sx={{
-            backgroundColor: "headerFooterBlue",
+            backgroundColor: "headerFooter",
             justifyContent: "space-around",
             alignItems: "center",
             width: "100%",

@@ -22,7 +22,7 @@ const LanguageSwitch = (props) => {
       }}
     >
       <IconGlobe />
-      <Text ml="0.25rem" sx={{ fontSize: "1rem", color: "black" }}>
+      <Text ml="0.25rem" sx={{ fontSize: "1rem", color: "text" }}>
         {SUPPORTED_LOCALES[nextLanguage(locale)]}
       </Text>
     </Flex>

@@ -9,7 +9,7 @@ export const theme = {
     text: "#000",
     background: "#fff",
     mainBackground: "lightGrey",
-    headerFooterBlue: "DeepSkyBlue",
+    headerFooter: "DeepSkyBlue",
     primary: "#33e",
     modes: {
       dark: {
@@ -17,7 +17,7 @@ export const theme = {
         text: "#FFF",
         background: "#222",
         mainBackground: "#000",
-        headerFooterBlue: "blue",
+        headerFooter: "#343434",
         primary: "#33e",
       },
     }

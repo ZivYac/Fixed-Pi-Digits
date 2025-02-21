@@ -1,5 +1,5 @@
 //Imports from react open source
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Text, Flex, Input, ThemeProvider } from "theme-ui";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -37,6 +37,7 @@ const Pi = () => {
     negative: false,
     tooLong: false,
   });
+  const increaseInterval = useRef(null);
   //--------------------------------------------------------------
   //Use effect to print every second 1 digit
   useEffect(() => {
@@ -44,7 +45,7 @@ const Pi = () => {
     const printDigits = () => {
       if (isStart && digitsToDisplay !== null)
         setDigitsToDisplay(
-          digitsToDisplay + piDigits.charAt(digitsToDisplay.length)
+          digitsToDisplay + piDigits.charAt (digitsToDisplay.length) //!!!
         );
     };
 
@@ -61,8 +62,8 @@ const Pi = () => {
   //Handle minus function, sub 1 from  numDigits
   const handleMinus = () => {
     if (numDigits === "") setNumDigits(0);
-    if(numDigits <= 1001) errorType.tooLong = false;
-    if(numDigits > 0) setNumDigits(Number(numDigits) - 1);
+    if(numDigits > 0) setNumDigits(numDigits => Math.max(Number(numDigits) - 1, 0));
+      if(numDigits <= 1000) errorType.tooLong = false;
     setIsStart(false);
   };
   //--------------------------------------------------------------
@@ -70,7 +71,7 @@ const Pi = () => {
   const handlePlus = () => {
     if (numDigits === "") setNumDigits(1);
     if(numDigits >= 1000) errorType.tooLong = true;
-    setNumDigits(Number(numDigits) + 1)
+    setNumDigits(numDigits => Number(numDigits) + 1)
     setIsStart(false);
   };
   //--------------------------------------------------------------
@@ -104,6 +105,22 @@ const Pi = () => {
     }
   };
   //--------------------------------------------------------------
+
+  const handleMouseDownIncrease = () => {
+    if(increaseInterval.current)
+      handleMouseUp();
+    increaseInterval.current = setInterval(handlePlus, 50);
+  }
+  const handleMouseUp = () => {
+    clearInterval(increaseInterval.current);
+    increaseInterval.current = null;
+  }
+
+  const handleMouseDownDecrease = () => {
+    if(increaseInterval.current)
+      handleMouseUp();
+    increaseInterval.current = setInterval(handleMinus, 50);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -152,7 +169,9 @@ const Pi = () => {
           <FormattedMessage id="lbl.number_of_digits" />
           <Flex id="plusMinus-container">
             <MyButton backgroundColor="coral" //!!!
-             onClick={handleMinus}>
+             onMouseDown={handleMouseDownDecrease}
+             onMouseUp={handleMouseUp}
+             onMouseLeave={handleMouseUp}>
               -
             </MyButton>
             <Input
@@ -172,7 +191,10 @@ const Pi = () => {
                 changeNumDigit(e.target.value);
               }}
             />
-            <MyButton backgroundColor="DeepSkyBlue" onClick={handlePlus}>
+            <MyButton backgroundColor="DeepSkyBlue" 
+            onMouseDown={handleMouseDownIncrease}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}>
               +
             </MyButton>
           </Flex>
