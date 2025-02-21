@@ -58,7 +58,7 @@ const Header = () => {
               id="LogOut"
               sx={{
                 color: "text",
-                backgroundColor: "background",
+                backgroundColor: "buttonBackground",
                 width: "auto",
                 whiteSpace: "nowrap"
               }}
@@ -69,7 +69,7 @@ const Header = () => {
 
               <MyButton sx={{
                 color: "text",
-                backgroundColor: "background",
+                backgroundColor: "buttonBackground",
                 width: "auto",
                 whiteSpace: "nowrap"
                 }}
