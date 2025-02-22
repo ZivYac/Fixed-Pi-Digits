@@ -16,5 +16,7 @@
   "lbl.theme_button_light": "העבר למצב כהה",
   "lbl.theme_button_dark": "העבר למצב בהיר",
   "lbl.search": "חפש",
-  "lbl.none": "כלום"
+  "lbl.none": "כלום",
+  "lbl.error_negative": "מספר הספרות חייב להיות חיובי",
+  "lbl.error_too_long": "מספר הספרות חייב להיות 1000 או פחות"
 }

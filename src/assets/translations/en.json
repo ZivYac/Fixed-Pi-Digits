@@ -16,5 +16,7 @@
   "lbl.theme_button_light": "Switch to dark mode",
   "lbl.theme_button_dark": "Switch to light mode",
   "lbl.search": "Search",
-  "lbl.none": "None"
+  "lbl.none": "None",
+  "lbl.error_negative": "Number of digits must be positive",
+  "lbl.error_too_long": "Number of digits must be 1000 or lower"
 }

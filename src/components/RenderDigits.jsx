@@ -1,3 +1,4 @@
+import { FormattedMessage } from "react-intl";
 import { Flex, Text, Spinner } from "theme-ui";
 
 const RenderDigits = ({
@@ -6,7 +7,33 @@ const RenderDigits = ({
   showSpinner,
   toHighlight,
 }) => {
+  const errors = errorType;
   const digArr = digitsToDisplay.split("");
+
+  const renderErrors = () => {
+    if(errorType.negative) {
+      return (
+      <Text sx={{
+        fontSize: "30px",
+        color: "red",
+        fontWeight: "bold",
+        textAlign: "center"
+      }}>
+        <FormattedMessage id="lbl.error_negative"/>
+      </Text>)
+    } else {
+      return (
+        <Text sx={{
+          fontSize: "30px",
+          color: "red",
+          fontWeight: "bold",
+          textAlign: "center"
+        }}>
+          <FormattedMessage id="lbl.error_too_long"/>
+        </Text>)
+    }
+  }
+
   return (
     <Flex
       sx={{
@@ -14,7 +41,7 @@ const RenderDigits = ({
         background: "whitesmoke",
         border: "solid",
         borderColor: errorType.negative || errorType.tooLong ? "red" : "black",
-        flexDirection: "flex-start",
+        flexDirection: (errorType.negative || errorType.tooLong) ? "column" : "flex-start",
         padding: "20px",
         width: "50%",
         borderRadius: "30px",
@@ -23,7 +50,9 @@ const RenderDigits = ({
         overflow: "visible"
       }}
     >
-      {digArr.map((dig) => {
+      {errorType.negative || errorType.tooLong ?
+      renderErrors() :
+      digArr.map((dig) => {
         return(
           <Text sx={{
             fontSize: "30px",

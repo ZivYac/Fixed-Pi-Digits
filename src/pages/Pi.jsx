@@ -76,8 +76,8 @@ const Pi = () => {
   //Handle minus function, sub 1 from  numDigits
   const handleMinus = () => {
     if (numDigits === "") setNumDigits(0);
+    if(numDigits <= 1001) errorType.tooLong = false;
     if(numDigits > 0) setNumDigits(numDigits => Math.max(Number(numDigits) - 1, 0));
-      if(numDigits <= 1000) errorType.tooLong = false;
     setIsStart(false);
     setDisablePause(true);
   };
@@ -111,6 +111,8 @@ const Pi = () => {
     setDigitsToDisplay("3.");
     setisRefreshed(true);
     setNumDigits(20);
+    if(numDigits > 1000)
+      setErrorType({negative: false, tooLong: false});
   };
   //--------------------------------------------------------------
   const changeNumDigit = (value) => {
@@ -369,7 +371,7 @@ const Pi = () => {
                 width: "auto",
                 textAlign: "center"
               }} 
-                disabled={isStart || !numDigits}
+                disabled={isStart || !numDigits || numDigits > 1000}
                 onClick={handleStart}
               >
                 <FormattedMessage id="lbl.start_button" />
