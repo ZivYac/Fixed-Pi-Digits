@@ -37,9 +37,10 @@ const Pi = () => {
   });
   const increaseInterval = useRef(null);
   const [selectedRadioButton, setSelectedRadioButton] = useState(10);
-  const [serachNumber, setSearchNumber] = useState('');
+  const [searchNumber, setSearchNumber] = useState('');
   const [disablePause, setDisablePause] = useState(false);
   const [foundIndexes, setFoundIndexes] = useState([]);
+  const [startSearch, setStartSearch] = useState(true);
 
   useEffect(() => {
     setDisablePause(digitsToDisplay.length - 2 === numDigits);
@@ -134,22 +135,27 @@ const Pi = () => {
       setSearchNumber(value);
     }
   }
-  const findIndexes = (num) => {
+  useEffect(() => {
+    if(piDigits && searchNumber) findIndexes(searchNumber);
+    else setFoundIndexes([]);
+  }, [startSearch]);
+  useEffect(() => {
     dispatch(getPiDigits(numDigits));
+  }, [numDigits]);
+
+  const findIndexes = (num) => {
+    const searchPiDigits = String(piDigits);
     const found = [];
-    let index = piDigits.indexOf(num);
+    let index = searchPiDigits.indexOf(num);
     while(index !== -1) {
       found.push(index);
-      index = piDigits.indexOf(num, index + 1);
+      index = searchPiDigits.indexOf(num, index + 1);
     }
-    return found;
+    setFoundIndexes(found);
   }
-  const handleSearch = (value) => {
-    if(value === '') setFoundIndexes([]);
-    else {
-      const indexes = findIndexes(value);
-      setFoundIndexes(indexes);
-    }
+
+  const handleSearch = () => {
+    setStartSearch(!startSearch);
   }
 
   return (
@@ -216,7 +222,7 @@ const Pi = () => {
                 marginBottom: "5px"
               }}
               type="text"
-              value = {serachNumber}
+              value = {searchNumber}
               onChange={(e) => {
                 changeSearchNum(e.target.value);
               }}
@@ -258,7 +264,7 @@ const Pi = () => {
                   width: "auto",
                   textAlign: "center"
                 }}
-                onClick={() => {handleSearch(document.querySelector('.SearchInput').value);}}
+                onClick={() => {handleSearch();}}
                 >
                 Search
               </MyButton>
@@ -380,38 +386,20 @@ const Pi = () => {
           gridTemplateRows: "repeat(4, 1fr)",
           gap: "1rem"
         }}>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="1"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 1 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"1"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(1)}}/>
-            <Input 
-              type="radio" 
-              name="highlightDig"
-              value="2"
-              sx={{
+          {[1,2,3,4,5,6,7,8,9, 0].map((buttonNumber) => {
+              return (
+                <Input
+                type="radio" 
+                name="highlightDig"
+                value={buttonNumber}
+                sx={{
                 position: "relative",
                 borderRadius:"20px",
-                background: selectedRadioButton === 2 ? "selectedBackground" : "buttonBackground",
+                background: selectedRadioButton === buttonNumber ? "selectedBackground" : "buttonBackground",
                 display: "block",
                 "&::after": {
                   color: "text",
-                  content: '"2"',
+                  content: `"${buttonNumber}"`,
                   position: "absolute",
                   textAlign: "center",
                   top: "50%",
@@ -419,188 +407,32 @@ const Pi = () => {
                   transform: "translate(-50%, -50%)"
                 }
               }}
-            onClick={() => {setSelectedRadioButton(2)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="3"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 3 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"3"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(3)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="4"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 4 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"4"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(4)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="5"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 5 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"5"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(5)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="6"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 6 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"6"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(6)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="7"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 7 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"7"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(7)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="8"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 8 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"8"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(8)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="9"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 9 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"9"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(9)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="0"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 0 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              "&::after": {
-                color: "text",
-                content: '"0"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(0)}}/>
-            <Input
-              type="radio" 
-              name="highlightDig"
-              value="10"
-              sx={{
-              position: "relative",
-              borderRadius:"20px",
-              background: selectedRadioButton === 10 ? "selectedBackground" : "buttonBackground",
-              display: "block",
-              gridColumn: "span 2",
-              "&::after": {
-                color: "text",
-                content: '"None"',
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)"
-              }
-            }}
-            onClick={() => {setSelectedRadioButton(10)}}/>
+              onClick={() => {setSelectedRadioButton(buttonNumber)}}
+              />
+            );
+          })}
+          <Input
+                type="radio" 
+                name="highlightDig"
+                value="10"
+                sx={{
+                position: "relative",
+                borderRadius:"20px",
+                gridColumn: "span 2",
+                background: selectedRadioButton === 10 ? "selectedBackground" : "buttonBackground",
+                display: "block",
+                "&::after": {
+                  color: "text",
+                  content: '"None"',
+                  position: "absolute",
+                  textAlign: "center",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)"
+                }
+              }}
+              onClick={() => {setSelectedRadioButton(10)}}
+              />
         </Flex>
 
 
