@@ -4,7 +4,9 @@ const RenderDigits = ({
   digitsToDisplay = "default value",
   errorType,
   showSpinner,
+  toHighlight,
 }) => {
+  const digArr = digitsToDisplay.split("");
   return (
     <Flex
       sx={{
@@ -16,26 +18,23 @@ const RenderDigits = ({
         padding: "20px",
         width: "50%",
         borderRadius: "30px",
+        height: "auto",
+        flexWrap: "wrap",
+        overflow: "visible"
       }}
     >
-      <Text
-        style={{
-          fontSize: "30px",
-          width: "100%",
-          color: errorType.negative || errorType.tooLong ? "red" : "black",
-          textAlign:
-            errorType.negative || errorType.tooLong ? "center" : "start",
-          wordBreak: "break-all",
-          pb: "3rem",
-        }}
-      >
-        {errorType.tooLong
-          ? "Number of digits cannot be larger than 1000!"
-          : errorType.negative
-          ? "Number must be positive!"
-          : digitsToDisplay}
-        {showSpinner && <Spinner size={"25px"} color={"DeepSkyBlue"}></Spinner>}
-      </Text>
+      {digArr.map((dig) => {
+        return(
+          <Text sx={{
+            fontSize: "30px",
+            height: "30px",
+            color: dig === String(toHighlight) ? "highlightText" : "#000",
+          }}>
+            {dig}
+          </Text>
+        );
+      })}
+      {showSpinner && <Spinner size={"25px"} color={"DeepSkyBlue"}></Spinner>}
     </Flex>
   );
 };

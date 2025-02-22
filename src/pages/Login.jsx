@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Flex, Heading, Image, Input, Label, Spinner } from "theme-ui";
+import { Button, Flex, Heading, Image, Input, Label, Spinner, ThemeProvider } from "theme-ui";
 import { useForm } from "react-hook-form";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
@@ -12,7 +12,8 @@ import { doLogin } from "../redux/slices/AuthSlice";
 import logo from "../assets/images/logo.svg";
 import background from "../assets/images/background.webp";
 
-import MindRouter from "../common/router";
+import { useColorMode } from "theme-ui";
+import { theme } from "../common/theme";
 
 const Login = () => {
   const history = useHistory();
@@ -22,7 +23,10 @@ const Login = () => {
   const [errorState, setErrorState] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [colorMode, setColorMode] = useColorMode();  
   const { register, handleSubmit } = useForm();
+
+  setColorMode('light');
 
   const ForgotPassword = () => {
     return (<Flex>
@@ -64,7 +68,9 @@ const Login = () => {
     if (loggedIn) history.push("/home");
   }, [history, loggedIn]);
 
+
   return (
+    <ThemeProvider theme={theme}>
     <Flex
       sx={{
         flexDirection: "column",
@@ -172,6 +178,7 @@ const Login = () => {
         </Flex>
       )}
     </Flex>
+    </ThemeProvider>
   );
 };
 

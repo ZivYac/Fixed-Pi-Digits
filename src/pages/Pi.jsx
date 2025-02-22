@@ -12,6 +12,7 @@ import RenderDigits from "../components/RenderDigits";
 import { FormattedMessage } from "react-intl";
 
 import { theme } from "../common/theme";
+import { useIntl } from "react-intl";
 
 //================================================================================
 const Pi = () => {
@@ -41,6 +42,12 @@ const Pi = () => {
   const [disablePause, setDisablePause] = useState(false);
   const [foundIndexes, setFoundIndexes] = useState([]);
   const [startSearch, setStartSearch] = useState(true);
+  const [noneText, setNoneText] = useState();
+  const intl = useIntl();
+
+  useEffect(() => {
+    setNoneText(intl.formatMessage({id: "lbl.none"}))
+  }, [intl.locale]);
 
   useEffect(() => {
     setDisablePause(digitsToDisplay.length - 2 === numDigits);
@@ -72,6 +79,7 @@ const Pi = () => {
     if(numDigits > 0) setNumDigits(numDigits => Math.max(Number(numDigits) - 1, 0));
       if(numDigits <= 1000) errorType.tooLong = false;
     setIsStart(false);
+    setDisablePause(true);
   };
   //--------------------------------------------------------------
   //Handle plus function, sub 1 from  numDigits
@@ -80,6 +88,7 @@ const Pi = () => {
     if(numDigits >= 1000) errorType.tooLong = true;
     setNumDigits(numDigits => Number(numDigits) + 1)
     setIsStart(false);
+    setDisablePause(true);
   };
   //--------------------------------------------------------------
   const handlePause = () => {
@@ -266,7 +275,7 @@ const Pi = () => {
                 }}
                 onClick={() => {handleSearch();}}
                 >
-                Search
+                <FormattedMessage id="lbl.search"/>
               </MyButton>
           </Flex>
 
@@ -366,7 +375,11 @@ const Pi = () => {
                 <FormattedMessage id="lbl.start_button" />
               </MyButton>
             </Flex>
-            <MyButton bg="lightgreen" onClick={handleRefresh}>
+            <MyButton sx={{
+              background: "refresh",
+              color: "text"
+            }}
+            onClick={handleRefresh}>
             <FormattedMessage id="lbl.refresh_button" />
             </MyButton>
         </Flex>
@@ -386,7 +399,7 @@ const Pi = () => {
           gridTemplateRows: "repeat(4, 1fr)",
           gap: "1rem"
         }}>
-          {[1,2,3,4,5,6,7,8,9, 0].map((buttonNumber) => {
+          {[1,2,3,4,5,6,7,8,9,0].map((buttonNumber) => {
               return (
                 <Input
                 type="radio" 
@@ -423,7 +436,7 @@ const Pi = () => {
                 display: "block",
                 "&::after": {
                   color: "text",
-                  content: '"None"',
+                  content: `"${noneText}"`,
                   position: "absolute",
                   textAlign: "center",
                   top: "50%",
@@ -440,6 +453,7 @@ const Pi = () => {
         <RenderDigits
           digitsToDisplay={digitsToDisplay}
           errorType={errorType}
+          toHighlight={selectedRadioButton}
           showSpinner={
             isStart &&
             digitsToDisplay !== null &&

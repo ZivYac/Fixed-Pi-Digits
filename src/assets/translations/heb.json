@@ -14,5 +14,7 @@
   "lbl.refresh_button": "טען מחדש",
   "lbl.logout": "יציאה",
   "lbl.theme_button_light": "העבר למצב כהה",
-  "lbl.theme_button_dark": "העבר למצב בהיר"
+  "lbl.theme_button_dark": "העבר למצב בהיר",
+  "lbl.search": "חפש",
+  "lbl.none": "כלום"
 }

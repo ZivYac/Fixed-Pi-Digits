@@ -14,5 +14,7 @@
   "lbl.refresh_button": "reîmprospăta",
   "lbl.logout": "deconectați-vă",
   "lbl.theme_button_light": "comutați pe modul întunecat",
-  "lbl.theme_button_dark": "comutați modul de lumină"
+  "lbl.theme_button_dark": "comutați modul de lumină",
+  "lbl.search": "căutare",
+  "lbl.none": "nici unul"
 }
