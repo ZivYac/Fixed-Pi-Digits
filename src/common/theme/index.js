@@ -11,7 +11,7 @@ export const theme = {
     highlightedText:"DeepSkyBlue",
     buttonBackground: "#fff",
     boxesBackground: "#c2e9ff",
-    mainBackground: "f2f2f2",
+    mainBackground: "#e5e5e5",
     headerFooter: "DeepSkyBlue",
     plusStart: "DeepSkyBlue",
     minusPause: "coral",
@@ -22,7 +22,7 @@ export const theme = {
       dark: {
         bodyText: "#000",
         text: "#FFF",
-        highlightText: "0075a8",
+        highlightText: "#0075a8",
         highlightedText:"#0075a8",
         buttonBackground: "#222",
         boxesBackground: "grey",

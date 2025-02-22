@@ -46,6 +46,12 @@ const Pi = () => {
   const intl = useIntl();
 
   useEffect(() => {
+    const negative = numDigits < 0;
+    const tooLong = numDigits > 1000;
+    setErrorType({negative, tooLong});
+  }, [numDigits]);
+
+  useEffect(() => {
     setNoneText(intl.formatMessage({id: "lbl.none"}))
   }, [intl.locale]);
 
@@ -158,7 +164,7 @@ const Pi = () => {
     const searchPiDigits = String(piDigits);
     const found = [];
     let index = searchPiDigits.indexOf(num);
-    while(index !== -1) {
+    while(index !== -1 && index < 1001) {
       found.push(index);
       index = searchPiDigits.indexOf(num, index + 1);
     }
