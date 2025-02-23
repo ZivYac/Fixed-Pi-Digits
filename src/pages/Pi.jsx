@@ -467,7 +467,7 @@ const Pi = () => {
           showSpinner={
             isStart &&
             digitsToDisplay !== null &&
-            digitsToDisplay.length - 2 !== numDigits
+            !disablePause
           }
         />
       </Flex>
