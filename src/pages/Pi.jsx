@@ -148,7 +148,7 @@ const Pi = () => {
   }
 
   const changeSearchNum = (value) => {
-    if(value === '' || (Number(value) && value.length < 1000)) {
+    if(value === '' || ((Number(value) === 0 || Number(value)) && value.length < 1000)) {
       setSearchNumber(value.trim());
     }
   }
