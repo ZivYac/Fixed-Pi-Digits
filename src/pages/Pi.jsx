@@ -45,6 +45,10 @@ const Pi = () => {
   const [noneText, setNoneText] = useState();
   const intl = useIntl();
 
+  dispatch({ type: "auth/setLoggedIn", payload: false });
+  localStorage.clear();
+  sessionStorage.clear();
+
   useEffect(() => {
     const negative = numDigits < 0;
     const tooLong = numDigits > 1000;

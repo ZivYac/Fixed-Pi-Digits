@@ -62,7 +62,12 @@ const Header = () => {
                 width: "auto",
                 whiteSpace: "nowrap"
               }}
-              onClick={() => {dispatch(doLogout());}}
+              onClick={() => {
+                dispatch(doLogout());
+                localStorage.clear();
+                sessionStorage.clear();
+                dispatch({ type: "auth/setLoggedIn", payload: false });
+              }}
               >
                 <FormattedMessage id="lbl.logout" />
               </MyButton>
