@@ -149,7 +149,7 @@ const Pi = () => {
 
   const changeSearchNum = (value) => {
     if(value === '' || (Number(value) && value.length < 1000)) {
-      setSearchNumber(value);
+      setSearchNumber(value.trim());
     }
   }
   useEffect(() => {
@@ -161,6 +161,7 @@ const Pi = () => {
   }, [numDigits]);
 
   const findIndexes = (num) => {
+    num = num.trim();
     const searchPiDigits = String(piDigits);
     const found = [];
     let index = searchPiDigits.indexOf(num);

@@ -62,7 +62,7 @@ const Header = () => {
                 width: "auto",
                 whiteSpace: "nowrap"
               }}
-              onClick={() => {dispatch(doLogout())}}
+              onClick={() => {dispatch(doLogout());}}
               >
                 <FormattedMessage id="lbl.logout" />
               </MyButton>
