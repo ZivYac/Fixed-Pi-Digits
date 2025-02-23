@@ -44,10 +44,18 @@ const Pi = () => {
   const [startSearch, setStartSearch] = useState(true);
   const [noneText, setNoneText] = useState();
   const intl = useIntl();
+  const [searchDigits, setSearchDigits] = useState('');
 
   dispatch({ type: "auth/setLoggedIn", payload: false });
   localStorage.clear();
   sessionStorage.clear();
+
+  useEffect(() => {
+    const getDigits = async () => {
+      if(!searchDigits) setSearchDigits(await dispatch(getPiDigits(1000)).unwrap());
+    }
+    getDigits();
+  }, [startSearch]);
 
   useEffect(() => {
     const negative = numDigits < 0;
@@ -157,21 +165,21 @@ const Pi = () => {
     }
   }
   useEffect(() => {
-    if(piDigits && searchNumber) findIndexes(searchNumber);
+    if(searchDigits && searchNumber) findIndexes(searchNumber);
     else setFoundIndexes([]);
   }, [startSearch]);
+  
   useEffect(() => {
     dispatch(getPiDigits(numDigits));
   }, [numDigits]);
 
   const findIndexes = (num) => {
     num = num.trim();
-    const searchPiDigits = String(piDigits);
     const found = [];
-    let index = searchPiDigits.indexOf(num);
+    let index = String(searchDigits).indexOf(num);
     while(index !== -1 && index < 1001) {
       found.push(index);
-      index = searchPiDigits.indexOf(num, index + 1);
+      index = String(searchDigits).indexOf(num, index + 1);
     }
     setFoundIndexes(found);
   }
@@ -194,7 +202,6 @@ const Pi = () => {
     >
       <Header />
 
-      <Text></Text>
 
       <Flex
         id="Body"
