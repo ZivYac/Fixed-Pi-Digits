@@ -257,8 +257,9 @@ const Pi = () => {
                   display: "grid",
                   gridTemplateColumns: "repeat(3, 1fr)",
                   gridTemplateRows: "repeat(4, 1fr)",
-                  overflow: 
-                  foundIndexes.length > 10 ? "scroll" : "hidden"
+                  overflowY: 
+                  foundIndexes.length > 10 ? "scroll" : "hidden",
+                  overflowX: "hidden"
                 }}>
                   {foundIndexes.map((item) => {
                         return (
