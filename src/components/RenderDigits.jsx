@@ -1,5 +1,6 @@
 import { FormattedMessage } from "react-intl";
 import { Flex, Text, Spinner } from "theme-ui";
+import MyButton from "./MyButton";
 
 const RenderDigits = ({
   digitsToDisplay = "default value",
@@ -35,36 +36,60 @@ const RenderDigits = ({
   }
 
   return (
-    <Flex
-      sx={{
-        marginTop: "50px",
-        background: "whitesmoke",
-        border: "solid",
-        borderColor: errorType.negative || errorType.tooLong ? "red" : "black",
-        flexDirection: (errorType.negative || errorType.tooLong) ? "column" : "flex-start",
-        padding: "20px",
-        width: "50%",
-        borderRadius: "30px",
-        height: "auto",
-        flexWrap: "wrap",
-        overflow: "visible"
-      }}
-    >
-      {errorType.negative || errorType.tooLong ?
-      renderErrors() :
-      digArr.map((dig) => {
-        return(
-          <Text sx={{
-            fontSize: "30px",
-            height: "30px",
-            color: dig === String(toHighlight) ? "highlightText" : "#000",
+    <Flex sx={{
+      marginTop: "50px",
+      flexDirection: "row",
+      padding: "20px",
+      height: "auto",
+      width: "100%",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <Flex
+        sx={{
+          background: "whitesmoke",
+          border: "solid",
+          borderColor: errorType.negative || errorType.tooLong ? "red" : "black",
+          flexDirection: (errorType.negative || errorType.tooLong) ? "column" : "flex-start",
+          width: "50%",
+          borderRadius: "30px",
+          height: "auto",
+          padding: "20px",
+          flexWrap: "wrap",
+          alignContent: "center",
+          overflow: "visible"
+        }}
+      >
+        {errorType.negative || errorType.tooLong ?
+        renderErrors() :
+        digArr.map((dig) => {
+          return(
+            <Text sx={{
+              fontSize: "30px",
+              height: "30px",
+              color: dig === String(toHighlight) ? "highlightText" : "#000",
+            }}>
+              {dig}
+            </Text>
+          );
+        })}
+        {showSpinner && <Spinner size={"25px"} color={"DeepSkyBlue"}></Spinner>}
+      </Flex>
+        <MyButton sx={{
+            background: "buttonBackground",
+            border: "solid",
+            height: "auto",
+            width: "auto",
+            padding: "20px",
+            fontSize: "23px",
+            color: "text"
+          }}
+          onClick={() => {
+            navigator.clipboard.writeText(digitsToDisplay);
           }}>
-            {dig}
-          </Text>
-        );
-      })}
-      {showSpinner && <Spinner size={"25px"} color={"DeepSkyBlue"}></Spinner>}
-    </Flex>
+            <FormattedMessage id="lbl.copy"/>
+        </MyButton>
+      </Flex>
   );
 };
 

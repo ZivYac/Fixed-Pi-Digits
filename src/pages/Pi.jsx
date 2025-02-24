@@ -471,16 +471,18 @@ const Pi = () => {
 
 
         </Flex>
-        <RenderDigits
-          digitsToDisplay={digitsToDisplay}
-          errorType={errorType}
-          toHighlight={selectedRadioButton}
-          showSpinner={
-            isStart &&
-            digitsToDisplay !== null &&
-            !disablePause
-          }
-        />
+          <RenderDigits sx={{
+            height: "100%",
+          }}
+            digitsToDisplay={digitsToDisplay}
+            errorType={errorType}
+            toHighlight={selectedRadioButton}
+            showSpinner={
+              isStart &&
+              digitsToDisplay !== null &&
+              !disablePause
+            }
+          />
       </Flex>
       <Footer />
     </Flex>

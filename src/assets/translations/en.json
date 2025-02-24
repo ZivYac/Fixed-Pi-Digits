@@ -18,5 +18,6 @@
   "lbl.search": "Search",
   "lbl.none": "None",
   "lbl.error_negative": "Number of digits must be positive",
-  "lbl.error_too_long": "Number of digits must be 1000 or lower"
+  "lbl.error_too_long": "Number of digits must be 1000 or lower",
+  "lbl.copy": "Copy"
 }

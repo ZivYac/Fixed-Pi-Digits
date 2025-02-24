@@ -18,5 +18,6 @@
   "lbl.search": "חפש",
   "lbl.none": "כלום",
   "lbl.error_negative": "מספר הספרות חייב להיות חיובי",
-  "lbl.error_too_long": "מספר הספרות חייב להיות 1000 או פחות"
+  "lbl.error_too_long": "מספר הספרות חייב להיות 1000 או פחות",
+  "lbl.copy": "העתק"
 }

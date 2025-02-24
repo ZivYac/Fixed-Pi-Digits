@@ -18,5 +18,6 @@
   "lbl.search": "căutare",
   "lbl.none": "nici unul",
   "lbl.error_negative": "numărul de cifre trebuie să fie pozitiv",
-  "lbl.error_too_long": "numărul de cifre trebuie să fie 1000 sau mai mic"
+  "lbl.error_too_long": "numărul de cifre trebuie să fie 1000 sau mai mic",
+  "lbl.copy": "copie"
 }
